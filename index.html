@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>An implementation of ROLLUP H2IRG on APACHE PIG by hxquangnhat</title>
+    <title>Pig-rollup by suwax</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,53 +15,38 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>An implementation of ROLLUP H2IRG on APACHE PIG</h1>
+        <h1>Pig-rollup</h1>
         <p></p>
 
-        <p class="view"><a href="https://github.com/hxquangnhat/PIG-ROLLUP-H2IRG">View the Project on GitHub <small>hxquangnhat/PIG-ROLLUP-H2IRG</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/hxquangnhat/PIG-ROLLUP-H2IRG/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/hxquangnhat/PIG-ROLLUP-H2IRG/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/hxquangnhat/PIG-ROLLUP-H2IRG">View On <strong>GitHub</strong></a></li>
-        </ul>
+        <p class="view"><a href="intro.html"><strong>Introduction</strong></a></p>
+        <p class="view"><a href="exp-setup.html"><strong>Experimental Setup</strong></p>
+        <p class="view"><a href="exp-result.html"><strong>Experiments' Results</strong></p>
+        <p class="view"><a href="https://github.com/suwax/PIG-ROLLUP">View the Project on GitHub <small>suwax/PIG-ROLLUP</small></a></p>
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+        <a name="Introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+        <p align="justify">
+        The current Rollup approach has the limitation on the communication costs. In this patch, we implemented the new ROLLUP approach, which were described in this <a href="http://www.eurecom.fr/en/publication/4212/download/rs-publi-4212_2.pdf">scientific paper</a>:
+        "Duy-Hung Phan, Matteo Dell'Amico, Pietro Michiardi: On the design space of MapReduce ROLLUP aggregates",
+        that can allow us to find a spot that can balance between the parallelism costs and the communication costs.</p><br>
+        
+        <h1>
+        <a name="Features" class="anchor" href="#feature"><span class="octicon octicon-link"></span></a>Features</h1>
+        <p>Our implementation contains the following features:<br>
+        1. The new ROLLUP approach: IRG, Hybrid IRG+IRG.<br>
+        2. The PIVOT clause in CUBE operators.<br>
+        3. Test cases.
+        </p><br>
+        The new syntax to use our ROLLUP approach:
+        <pre><code>alias = CUBE rel BY { CUBE col_ref | ROLLUP col_ref [PIVOT pivot_value]}
+         [, { CUBE col_ref | ROLLUP col_ref [PIVOT pivot_value]} ...]</code></pre>
+         
+         <p>We have also made some experiments to demonstrate our improvement on this ROLLUP H2IRG.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/hxquangnhat">hxquangnhat</a></p>
+        <p>This project is maintained by <a href="https://github.com/suwax">suwax</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
