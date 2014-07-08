@@ -28,9 +28,10 @@
         <a name="Introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
         <p align="justify">
-        The current Rollup approach has the limitation on the communication costs. In this patch, we implemented the new ROLLUP approach, which were described in this <a href="http://www.eurecom.fr/en/publication/4212/download/rs-publi-4212_2.pdf">scientific paper</a>:
-        "Duy-Hung Phan, Matteo Dell'Amico, Pietro Michiardi: On the design space of MapReduce ROLLUP aggregates",
-        that can allow us to find a spot that can balance between the parallelism costs and the communication costs.</p><br>
+        This patch aims at addressing the current limitation of the ROLLUP operator in PIG: most of the work is done in the Map phase of the underlying MapReduce job to generate all possible intermediate keys that the reducer use to aggregate and produce the ROLLUP output.<br>
+        Based on our <a href="http://www.eurecom.fr/en/publication/4212/download/rs-publi-4212_2.pdf">previous work</a>, we show that the design space for a ROLLUP implementation allows for a different approach (in-reducer grouping, IRG), in which less work is done in the Map phase and the grouping is done in the Reduce phase.<br>
+        This patch presents the most efficient implementation we designed (Hybrid IRG), which allows defining a parameter to balance between parallelism (in the reducers) and communication cost.
+        </p><br>
         
         <h1>
         <a name="Features" class="anchor" href="#feature"><span class="octicon octicon-link"></span></a>Features</h1>
