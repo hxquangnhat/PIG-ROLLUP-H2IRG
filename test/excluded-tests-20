@@ -1,0 +1,7 @@
+**/TestSecondarySortTez.java
+**/TestTezCompiler.java
+**/TestTezJobControlCompiler.java
+**/TestTezLauncher.java
+**/TestTezAutoParallelism.java
+**/TestJobSubmissionTez.java
+**/TestGroupConstParallelTez.java
